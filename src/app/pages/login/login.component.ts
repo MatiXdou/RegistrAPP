@@ -26,7 +26,7 @@ export class LoginComponent  implements OnInit {
   constructor() { }
 
   login(usuario: string, clave: string): void {
-    this.authService.buscarBD(usuario, clave);
+    this.authService.buscarBD2(usuario, clave);
 
     this.authService.isAuthenticated$.subscribe(isAuthenticated => {
       if (isAuthenticated) {

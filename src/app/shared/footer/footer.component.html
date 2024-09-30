@@ -3,7 +3,6 @@
     <div class="pie">
       <p><a [routerLink]="['/']">Home</a></p>
       @if (usuario){
-        <p><a [routerLink]="['/alumno']">Alumno</a></p>
         <p><a [routerLink]="['/logout']">Logout</a></p>
       } @else {
         <p><a [routerLink]="['/login']">Login</a></p>
