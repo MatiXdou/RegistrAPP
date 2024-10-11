@@ -6,6 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { redirectIfAuthGuard } from '../guard/redirect-if-auth.guard';
 import { authGuard } from '../guard/auth.guard';
+import { RegistrarComponent } from './registrar/registrar.component';
+import { AlumnoComponent } from './alumno/alumno.component';
+import { DocenteComponent } from './docente/docente.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,6 +16,9 @@ const routes: Routes = [
   { path: 'not-found', component: NotFoundComponent },
   { path: 'login', component: LoginComponent, canActivate: [redirectIfAuthGuard] },
   { path: 'logout', component: LogoutComponent, canActivate: [authGuard] },
+  { path: 'registrar', component: RegistrarComponent },
+  { path: 'alumno', component: AlumnoComponent, canActivate: [authGuard] },
+  { path: 'docente', component: DocenteComponent, canActivate: [authGuard] },
 
 
 ];

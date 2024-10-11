@@ -9,6 +9,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FormsModule } from '@angular/forms';
+import { RegistrarComponent } from './registrar/registrar.component';
+import { AlumnoComponent } from './alumno/alumno.component';
+import { DocenteComponent } from './docente/docente.component';
 
 
 @NgModule({
@@ -17,6 +20,9 @@ import { FormsModule } from '@angular/forms';
     NotFoundComponent,
     LoginComponent,
     LogoutComponent,
+    RegistrarComponent,
+    AlumnoComponent,
+    DocenteComponent,
   ],
   imports: [
     CommonModule,

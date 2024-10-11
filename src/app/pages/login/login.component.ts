@@ -25,18 +25,33 @@ export class LoginComponent  implements OnInit {
 
   constructor() { }
 
-  login(usuario: string, clave: string): void {
-    this.authService.buscarBD2(usuario, clave);
+  isLoading: boolean = false;
+  async login(usuario: string, clave: string) {
+    this.isLoading = true;
+    await this.authService.buscarBD4(usuario, clave);
+    this.isLoading = false;
 
     this.authService.isAuthenticated$.subscribe(isAuthenticated => {
-      if (isAuthenticated) {
-        this.usuario = '';
-        this.clave = '';
-        this.router.navigate(['/home']);
-      } else {
-        this.loginFailed = true;
-      }
+      this.authService.usuarioCompleto$.subscribe(usuarioCompleto => {
+        if (isAuthenticated) {
+          this.usuario = '';
+          this.clave = '';
+          if (usuarioCompleto.rol === "docente") {
+            this.usuario = '';
+            this.clave = '';
+            this.router.navigate(['/docente']);
+          }
+          else{
+            this.usuario = '';
+            this.clave = '';
+            this.router.navigate(['/alumno']);
+          }
+        } else {
+          this.loginFailed = true;
+        }
+      });
     });
+
   }
 
 }

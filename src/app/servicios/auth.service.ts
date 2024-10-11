@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { usuariosSimulados } from '../models/data.models';
+import { WebService } from './web.service';
+import { UsuarioAPI } from '../models/usuarioAPI.models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,28 +16,46 @@ export class AuthService {
   private usuarioSubject = new BehaviorSubject<string>('');
   usuario$ = this.usuarioSubject.asObservable();
 
+  private usuarioCompletoSubject = new BehaviorSubject<UsuarioAPI>(null);
+  usuarioCompleto$ = this.usuarioCompletoSubject.asObservable();
+
   private loginFailedSubject = new BehaviorSubject<boolean>(false);
   loginFailed$ = this.loginFailedSubject.asObservable();
 
 
+  webservice = inject(WebService);
+  async buscarBD4(usuario: string, clave: string){
+    const url = 'https://66ff4dd02b9aac9c997ee137.mockapi.io/'
+    const res = await this.webservice.request('GET', url, 'users') as Array<UsuarioAPI>;
 
-  buscarBD2(usuario: string, clave: string): void { // Simulación de la autenticación con base en datos fijas
-    const usuarioEncontrado = usuariosSimulados.find( // Buscar un usuario en la lista de usuarios simulados
-      u => u.usuario === usuario && u.clave === clave // Revisar si el usuario y la clave coinciden con los datos de un usuario
-    );
-
-    if (usuarioEncontrado) { // Si el usuario y la clave coinciden con los datos de un usuario, activar
-      this.isAuthenticatedSubject.next(true); // Activar el estado de autenticación si la autenticación es correcta.
-      this.usuarioSubject.next(usuarioEncontrado.nombreCompleto); // Actualizar el nombre completo del usuario autenticado.
-      this.loginFailedSubject.next(false);  // Restablecer loginFailed a false
+    const user = res.find(u => u.user === usuario && u.pass === clave);
+    if (user) {
+      console.log('Autenticación exitosa!');
+      console.log(user);
+      this.isAuthenticatedSubject.next(true);
+      this.usuarioSubject.next(user.name);
+      this.usuarioCompletoSubject.next(user);
+      this.loginFailedSubject.next(false);
     } else {
-      this.isAuthenticatedSubject.next(false); // Desactivar el estado de autenticación si la autenticación es incorrecta.
-      this.loginFailedSubject.next(true);  // Establecer loginFailed a true si falla la autenticación
+      this.isAuthenticatedSubject.next(false);
+      this.loginFailedSubject.next(true);
+    }
+  }
+
+  async registrarNuevoUsuario(usuario: any) {
+    const url = 'https://66ff4dd02b9aac9c997ee137.mockapi.io/';
+    try {
+      const res = await this.webservice.request('POST', url, 'users', usuario);
+      console.log('Usuario registrado con éxito', res);
+    } catch (error) {
+      console.error('Error al registrar usuario:', error);
+      throw error;
     }
   }
 
   logout(): void {
     this.usuarioSubject.next('');
+    this.usuarioCompletoSubject.next(null);
     this.isAuthenticatedSubject.next(false);
     this.loginFailedSubject.next(false);
   }

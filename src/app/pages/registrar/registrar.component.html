@@ -1,0 +1,38 @@
+<app-header></app-header>
+<ion-content>
+
+  <!-- Contenido de Registro -->
+  <h1 style="text-align: center;">Registrar</h1>
+  <p style="text-align: center;">Ingrese sus datos para crear una cuenta.</p>
+
+  <ion-item>
+    <ion-input [(ngModel)]="usuario" label="Usuario:" labelPlacement="floating" placeholder="Ingrese su usuario"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [(ngModel)]="clave" label="Contraseña:" labelPlacement="floating" placeholder="Ingrese su contraseña" type="password"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [(ngModel)]="nombreCompleto"  label="Nombre Completo:" labelPlacement="floating" placeholder="Ingrese su nombre completo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input [(ngModel)]="telefono"  label="Telefono:" labelPlacement="floating" placeholder="Ingrese su telefono"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-select [(ngModel)]="rol" label="Rol:" labelPlacement="floating">
+      <ion-select-option value="docente">Docente</ion-select-option>
+      <ion-select-option value="alumno">Alumno</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button (click)="registrar()" expand="block" fill="clear" shape="round">Registrar</ion-button>
+
+  <!-- Mostrar mensaje de error si el registro falla -->
+  <ion-text color="danger" *ngIf="registroFallido">
+    Ocurrió un error en el registro.
+  </ion-text>
+</ion-content>
+<app-footer></app-footer>
