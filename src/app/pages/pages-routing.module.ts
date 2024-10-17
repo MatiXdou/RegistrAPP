@@ -9,6 +9,7 @@ import { authGuard } from '../guard/auth.guard';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { AlumnoComponent } from './alumno/alumno.component';
 import { DocenteComponent } from './docente/docente.component';
+import { AsistenciaComponent } from './asistencia/asistencia.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'registrar', component: RegistrarComponent },
   { path: 'alumno', component: AlumnoComponent, canActivate: [authGuard] },
   { path: 'docente', component: DocenteComponent, canActivate: [authGuard] },
+  { path: 'asistencia/:codigo/:usuario/:fecha', component: AsistenciaComponent },
 
 
 ];

@@ -1,7 +1,6 @@
 <ion-footer>
   <ion-toolbar>
     <div class="pie">
-      <p><a [routerLink]="['/']">Home</a></p>
       @if (usuario){
         @if (usuarioCompleto.rol === 'docente') {
           <p><a [routerLink]="['/docente']">Docente</a></p>
@@ -10,6 +9,7 @@
         }
         <p><a [routerLink]="['/logout']">Logout</a></p>
       } @else {
+        <p><a [routerLink]="['/']">Home</a></p>
         <p><a [routerLink]="['/login']">Login</a></p>
       }
     </div>

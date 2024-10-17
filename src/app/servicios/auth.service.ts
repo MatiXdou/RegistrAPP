@@ -25,7 +25,7 @@ export class AuthService {
 
   webservice = inject(WebService);
   async buscarBD4(usuario: string, clave: string){
-    const url = 'https://66ff4dd02b9aac9c997ee137.mockapi.io/'
+    const url = 'https://670e7cbc3e7151861654bdf5.mockapi.io/'
     const res = await this.webservice.request('GET', url, 'users') as Array<UsuarioAPI>;
 
     const user = res.find(u => u.user === usuario && u.pass === clave);
@@ -42,16 +42,36 @@ export class AuthService {
     }
   }
 
-  async registrarNuevoUsuario(usuario: any) {
-    const url = 'https://66ff4dd02b9aac9c997ee137.mockapi.io/';
-    try {
-      const res = await this.webservice.request('POST', url, 'users', usuario);
-      console.log('Usuario registrado con éxito', res);
-    } catch (error) {
-      console.error('Error al registrar usuario:', error);
-      throw error;
+
+async registrarNuevoUsuario(usuario: any) {
+  const url = 'https://670e7cbc3e7151861654bdf5.mockapi.io/';
+  try {
+    const revisaUsuarios = await this.analizaUsuario();
+    const usuarioExiste = revisaUsuarios.find(u => u.user === usuario.user);
+
+    if (usuarioExiste) {
+      throw new Error('El usuario ya está registrado, intenta con otro.');
     }
+
+    const res = await this.webservice.request('POST', url, 'users', usuario);
+    console.log('Usuario registrado con éxito', res);
+  } catch (error) {
+    console.error('Error al registrar usuario:', error);
+    throw error;
   }
+}
+
+async analizaUsuario(): Promise<UsuarioAPI[]> {
+  const url = 'https://670e7cbc3e7151861654bdf5.mockapi.io/';
+  try {
+    const res = await this.webservice.request('GET', url, 'users') as Array<UsuarioAPI>;
+    return res;
+  } catch (error) {
+    console.error('Error al obtener usuarios:', error);
+    throw error;
+  }
+}
+
 
   logout(): void {
     this.usuarioSubject.next('');

@@ -9,8 +9,8 @@ import { AuthService } from 'src/app/servicios/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent  implements OnInit {
-  usuario: string ='';
-  clave: string ='';
+  usuario: string = '';
+  clave: string = '';
 
   private authService = inject(AuthService);
   private router = inject(Router);
