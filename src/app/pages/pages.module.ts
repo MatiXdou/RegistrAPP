@@ -1,36 +1,41 @@
-import { IonicModule } from '@ionic/angular';
-import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
-import { FormsModule } from '@angular/forms';
-import { RegistrarComponent } from './registrar/registrar.component';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlumnoComponent } from './alumno/alumno.component';
 import { DocenteComponent } from './docente/docente.component';
 import { AsistenciaComponent } from './asistencia/asistencia.component';
+import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
+import { CerrarSesionComponent } from './cerrar-sesion/cerrar-sesion.component';
+import { CompartidoModule } from '../compartido/compartido.module';
+import { RouterLink } from '@angular/router';
+import { MostrarQrComponent } from './mostrar-qr/mostrar-qr.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { NoEncontradaComponent } from './no-encontrada/no-encontrada.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    NotFoundComponent,
-    LoginComponent,
-    LogoutComponent,
-    RegistrarComponent,
+    InicioComponent,
     AlumnoComponent,
     DocenteComponent,
+    NoEncontradaComponent,
+    IniciarSesionComponent,
+    CerrarSesionComponent,
+    RegistrarseComponent,
     AsistenciaComponent,
+    MostrarQrComponent,
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
-    SharedModule,
+    CompartidoModule,
     IonicModule,
     FormsModule,
+    ReactiveFormsModule,
+    RouterLink,
   ]
 })
 export class PagesModule { }

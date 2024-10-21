@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
-import { redirectIfAuthGuard } from '../guard/redirect-if-auth.guard';
+import { RouterModule, Routes, CanActivateFn } from '@angular/router';
 import { authGuard } from '../guard/auth.guard';
-import { RegistrarComponent } from './registrar/registrar.component';
+import { redirectIfAuthGuard } from '../guard/redirect-if-auth.guard';
 import { AlumnoComponent } from './alumno/alumno.component';
 import { DocenteComponent } from './docente/docente.component';
 import { AsistenciaComponent } from './asistencia/asistencia.component';
+import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { IniciarSesionComponent } from './iniciar-sesion/iniciar-sesion.component';
+import { CerrarSesionComponent } from './cerrar-sesion/cerrar-sesion.component';
+import { MostrarQrComponent } from './mostrar-qr/mostrar-qr.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { NoEncontradaComponent } from './no-encontrada/no-encontrada.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'not-found', component: NotFoundComponent },
-  { path: 'login', component: LoginComponent, canActivate: [redirectIfAuthGuard] },
-  { path: 'logout', component: LogoutComponent, canActivate: [authGuard] },
-  { path: 'registrar', component: RegistrarComponent },
-  { path: 'alumno', component: AlumnoComponent, canActivate: [authGuard] },
-  { path: 'docente', component: DocenteComponent, canActivate: [authGuard] },
-  { path: 'asistencia/:codigo/:usuario/:fecha', component: AsistenciaComponent },
-
-
+  {path: 'inicio', component: InicioComponent},
+  {path: '', component: IniciarSesionComponent},
+  {path: 'alumno', component: AlumnoComponent, canActivate: [authGuard]},
+  {path: 'docente', component: DocenteComponent, canActivate: [authGuard]},
+  {path: 'pagina-no-encontrada', component: NoEncontradaComponent},
+  {path: 'iniciar-sesion', component: IniciarSesionComponent, canActivate: [redirectIfAuthGuard]},
+  {path: 'cerrar-sesion', component: CerrarSesionComponent, canActivate: [authGuard]},
+  {path: 'registrarse', component: RegistrarseComponent},
+  {path: 'asistencia/:codigo/:usuario/:fecha', component: AsistenciaComponent},
+  {path: 'mostrar-qr/:id/:nombre', component: MostrarQrComponent, canActivate: [authGuard]},
 ];
 
 @NgModule({

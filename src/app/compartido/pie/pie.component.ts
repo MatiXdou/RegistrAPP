@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UsuarioAPI } from 'src/app/models/usuarioAPI.models';
+import { UsuarioAPI } from 'src/app/models/usuarioapi.models';
 import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  selector: 'app-pie',
+  templateUrl: './pie.component.html',
+  styleUrls: ['./pie.component.scss'],
 })
-export class FooterComponent  implements OnInit {
+export class PieComponent  implements OnInit {
 
   usuario: string;
   private authService = inject(AuthService);

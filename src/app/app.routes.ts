@@ -1,3 +1,4 @@
+import { PagesModule } from './pages/pages.module';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -7,11 +8,11 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'iniciar-sesion',
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: 'not-found',
-  },
+    redirectTo: 'pagina-no-encontrada',
+  }
 ];
